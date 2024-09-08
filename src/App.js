@@ -5,14 +5,14 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import styles for notifications
+import 'react-toastify/dist/ReactToastify.css'; 
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <Router>
-      <ToastContainer /> {/* This will handle the popups */}
+      <ToastContainer /> 
       <Routes>
         <Route path="/" element={isLoggedIn ? <Navigate to="/dashboard" /> : <Home />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
