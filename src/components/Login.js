@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TextField, Button, Typography } from '@mui/material';
-import { toast } from 'react-toastify'; // Import toast for popups
+import { toast } from 'react-toastify'; 
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
@@ -12,18 +12,18 @@ const Login = ({ setIsLoggedIn }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Replace with your login API call
+     
       const res = await axios.post('https://backend-login-lbxh.onrender.com/api/auth/login', { email, password });
 
       if (res.status === 200) {
-        setIsLoggedIn(true);  // Successful login
-        toast.success('Login successful!');  // Show success popup
-        navigate('/dashboard');  // Redirect to dashboard
+        setIsLoggedIn(true);  
+        toast.success('Login successful!'); 
+        navigate('/dashboard'); 
       } else {
-        toast.error('Login failed! Please try again.');  // Show error popup
+        toast.error('Login failed! Please try again.');  
       }
     } catch (err) {
-      toast.error('Login failed! Please check your credentials.');  // Show error popup
+      toast.error('Login failed! Please check your credentials.');  
     }
   };
 
