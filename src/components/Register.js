@@ -9,7 +9,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { email, password });
+      await axios.post('https://backend-login-lbxh.onrender.com/api/auth/register', { email, password });
       alert('User registered successfully');
     } catch (err) {
       if (err.response) {
