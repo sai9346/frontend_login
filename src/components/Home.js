@@ -25,7 +25,6 @@ const Home = () => {
   );
 };
 
-// Styles for Home component
 const styles = {
   container: {
     display: 'flex',
