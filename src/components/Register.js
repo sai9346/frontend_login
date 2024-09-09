@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('https://backend-login-lbxh.onrender.com/api/auth/register', { email, password });
       alert('User registered successfully');
+      navigate('/');
     } catch (err) {
       if (err.response) {
         console.error(err.response.data.msg);

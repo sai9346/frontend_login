@@ -5,8 +5,8 @@ const Dashboard = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setIsLoggedIn(false);  // Reset login state
-    navigate('/');  // Redirect to home after logout
+    setIsLoggedIn(false);  
+    navigate('/');  
   };
 
   return (
