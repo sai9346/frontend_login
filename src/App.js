@@ -7,7 +7,11 @@ import Dashboard from './components/Dashboard';
 import TokenDisplay from './components/TokenDisplay';
 import Navbar from './components/Navbar'; // Navbar component
 import { ToastContainer } from 'react-toastify';
+<<<<<<< HEAD
 import 'react-toastify/dist/ReactToastify.css';
+=======
+import 'react-toastify/dist/ReactToastify.css'; 
+>>>>>>> 496f6d83b6d560a7828181ba384a813dd662a48e
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -22,8 +26,12 @@ function App() {
 
   return (
     <Router>
+<<<<<<< HEAD
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <ToastContainer />
+=======
+      <ToastContainer /> 
+>>>>>>> 496f6d83b6d560a7828181ba384a813dd662a48e
       <Routes>
         <Route path="/" element={isLoggedIn ? <Navigate to="/dashboard" /> : <Home />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
