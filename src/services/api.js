@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getAccessToken, setAccessToken } from '../utils/auth';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api', // Make sure the backend URL is correct
+  baseURL: 'https://backend-login-lbxh.onrender.com/api', // Make sure the backend URL is correct
   withCredentials: true, // Include this to ensure cookies (refresh token) are sent
 });
 
@@ -35,7 +35,7 @@ api.interceptors.response.use(
 
         // Call the refresh token endpoint
         const response = await axios.post(
-          'http://localhost:8080/api/refreshToken', 
+          'https://backend-login-lbxh.onrender.com/api/refreshToken', 
           { refreshToken }, 
           { withCredentials: true } // Ensure cookies are sent with the request
         );
