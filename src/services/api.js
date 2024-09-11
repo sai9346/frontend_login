@@ -2,14 +2,14 @@ import axios from 'axios';
 import { getAccessToken, setAccessToken } from '../utils/auth';
 
 const api = axios.create({
-  baseURL: 'https://backend-login-lbxh.onrender.com/api', // Make sure the backend URL is correct
-  withCredentials: true, // Include this to ensure cookies (refresh token) are sent
+  baseURL: 'https://backend-login-lbxh.onrender.com/api', 
+  withCredentials: true, 
 });
 
-// Interceptor to attach the Authorization header with the access token
+
 api.interceptors.request.use(
   (config) => {
-    const token = getAccessToken(); // Retrieve access token from storage
+    const token = getAccessToken(); 
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -18,55 +18,54 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Interceptor to handle responses, including token refreshing when a 401 error occurs
 api.interceptors.response.use(
-  (response) => response, // Return the response as it is
+  (response) => response, 
   async (error) => {
     const originalRequest = error.config;
 
-    // Check if it's a 401 error and that we haven't retried this request already
+    
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        const refreshToken = localStorage.getItem('refreshToken'); // Retrieve refresh token
+        const refreshToken = localStorage.getItem('refreshToken'); 
         if (!refreshToken) {
           throw new Error('No refresh token available');
         }
 
-        // Call the refresh token endpoint
+        
         const response = await axios.post(
           'https://backend-login-lbxh.onrender.com/api/refreshToken', 
           { refreshToken }, 
-          { withCredentials: true } // Ensure cookies are sent with the request
+          { withCredentials: true } 
         );
 
-        setAccessToken(response.data.accessToken); // Update the access token in localStorage
+        setAccessToken(response.data.accessToken); 
 
-        // Update the authorization header for the original request and retry
+        
         originalRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
-        return api(originalRequest); // Retry the original request
+        return api(originalRequest); 
       } catch (err) {
         console.error('Error refreshing token:', err);
-        // Remove tokens and redirect to login if refreshing fails
+        
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-        window.location.href = '/login'; // Redirect to login page
+        window.location.href = '/login'; 
       }
     }
-    return Promise.reject(error); // Reject the error if not a 401 or if retry fails
+    return Promise.reject(error); 
   }
 );
 
-// API calls
-export const login = (credentials) => api.post('/login', credentials); // Login
-export const register = (userData) => api.post('/register', userData); // Register
-export const getUser = () => api.get('/user'); // Get user details
+
+export const login = (credentials) => api.post('/login', credentials); 
+export const register = (userData) => api.post('/register', userData); 
+export const getUser = () => api.get('/user'); 
 export const logout = async () => {
   try {
-    await api.post('/logout'); // Call logout API
-    localStorage.removeItem('accessToken'); // Clear tokens
+    await api.post('/logout'); 
+    localStorage.removeItem('accessToken'); 
     localStorage.removeItem('refreshToken');
-    window.location.href = '/login'; // Redirect to login page
+    window.location.href = '/login'; 
   } catch (error) {
     console.error('Error during logout:', error);
   }
