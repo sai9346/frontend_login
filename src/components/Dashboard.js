@@ -45,7 +45,7 @@ function Dashboard() {
             </div>
             <div className="divide-y divide-gray-200">
               <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                <p>Hello, {user ? user.userName : 'User'}!</p>
+                <p>Hello, {user ? user.userName : 'users'}!</p>
                 <p>This is your personal dashboard. Here you can view and manage your account.</p>
               </div>
               <div className="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7">

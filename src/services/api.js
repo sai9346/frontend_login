@@ -49,7 +49,7 @@ api.interceptors.response.use(
         
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-        window.location.href = '/login'; 
+        window.location.href = '/logIn'; 
       }
     }
     return Promise.reject(error); 
@@ -57,15 +57,15 @@ api.interceptors.response.use(
 );
 
 
-export const login = (credentials) => api.post('/login', credentials); 
-export const register = (userData) => api.post('/register', userData); 
-export const getUser = () => api.get('/user'); 
+export const login = (credentials) => api.post('/logIn', credentials); 
+export const register = (userData) => api.post('/signUp', userData); 
+export const getUser = () => api.get('/users'); 
 export const logout = async () => {
   try {
     await api.post('/logout'); 
     localStorage.removeItem('accessToken'); 
     localStorage.removeItem('refreshToken');
-    window.location.href = '/login'; 
+    window.location.href = '/logIn'; 
   } catch (error) {
     console.error('Error during logout:', error);
   }
